@@ -1,0 +1,14 @@
+
+<%= form_for [:admin, @widget], url: admin_widget_path(@widget) do |f| %>
+  <fieldset>
+    <legend><%= @widget.klass %> Widget</legend>
+
+    <%= render :partial => 'form', :locals => { :f => f } %>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'save' %>
+      <%= Spree.t(:or) %>
+      <%= button_link_to Spree.t('actions.cancel'), admin_widgets_path, :icon => "remove" %>
+    </div>
+  </fieldset>
+<% end %>

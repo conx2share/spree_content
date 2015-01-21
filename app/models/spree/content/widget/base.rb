@@ -22,6 +22,10 @@ module Spree::Content
         end
       end
 
+      def self.descendants
+        ObjectSpace.each_object(Class).select { |klass| klass < self }
+      end
+
       validates_presence_of :id, :name
 
       def persisted?

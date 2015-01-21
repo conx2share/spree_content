@@ -1,0 +1,35 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_widgets) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_widget), new_admin_widget_path, :class => "btn-success", :icon => 'add', :id => 'admin_new_order' %>
+<% end if can? :edit, Spree::Order.new %>
+
+<% if @widgets.any? %>
+  <table class="table" id="listing_widgets" data-hook>
+    <thead>
+      <tr>
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:type) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @widgets.each do |widget| %>
+      <tr <%= cycle('odd', 'even') %>">
+        <td><%= widget.name %></td>
+        <td><%= widget.klass %></td>
+        <td class="actions actions-1">
+          <%= link_to_edit_url edit_admin_widget_path(widget), :title => "admin_edit_#{dom_id(widget)}", :no_text => true %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:widget, scope: 'activerecord.models.spree/resource')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_widget_path %>!
+  </div>
+<% end %>
