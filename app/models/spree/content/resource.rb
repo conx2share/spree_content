@@ -33,7 +33,7 @@ module Spree::Content
     end
 
     def render options={}
-      self.elements.map(&:render, renderer, context, options).join "\n"
+      self.elements.map { |e| e.render renderer, context, options }.join "\n"
     end
 
     def index_attributes
