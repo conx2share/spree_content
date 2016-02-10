@@ -12,6 +12,8 @@ module Spree::Content
 
     attribute :elements, ElementSet, default: []
 
+    attr_accessor :renderer, :context
+
     validates_presence_of :id, :name
 
     def persisted?
@@ -30,8 +32,8 @@ module Spree::Content
       self.class.to_s.split('::').last.tableize.singularize
     end
 
-    def render
-      self.elements.map(&:render).join "\n"
+    def render options={}
+      self.elements.map(&:render, renderer, context, options).join "\n"
     end
 
     def index_attributes

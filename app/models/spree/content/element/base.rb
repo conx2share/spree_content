@@ -36,10 +36,10 @@ module Spree::Content
         self.attributes.merge type: type
       end
 
-      def render
-        # TODO: Extract this to a class, that can be replaced via the :engine attribute
-        erb = Erubis::Eruby.new(template)
-        erb.result(element: self)
+      def render(renderer, context, options={})
+        options = options.dup
+        options[:partial] ||= "widgets/{self.class.to_s.split('::').last.downcase}"
+        renderer.render(context, options)
       end
 
       private
