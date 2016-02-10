@@ -3,8 +3,8 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_content'
   s.version     = '0.0.1'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Spree Widgets'
+  s.description = 'Spree Widgets'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Ivgeni Slabkovski'
