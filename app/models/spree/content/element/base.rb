@@ -38,7 +38,7 @@ module Spree::Content
 
       def render(renderer, context, options={})
         options = options.dup
-        options[:partial] ||= "widgets/{self.class.to_s.split('::').last.downcase}"
+        options[:partial] ||= "widgets/#{self.class.to_s.split('::').last.downcase}"
         renderer.render(context, options)
       end
 
