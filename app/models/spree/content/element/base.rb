@@ -6,13 +6,13 @@ module Spree::Content
       include ActiveModel::Conversion
       extend ActiveModel::Naming
 
-      #attribute :id, BSON::ObjectId, default: Proc.new { BSON::ObjectId.new.to_s }
+      attribute :id, BSON::ObjectId, default: Proc.new { BSON::ObjectId.new.to_s }
       attribute :name, String
       attribute :required, Boolean, default: false
-      #attribute :language, String, default: 'en-US'
+      attribute :language, String, default: 'en-US'
 
-      #attribute :engine, Symbol, default: :erubis
-      #attribute :template, String, default: :default_template
+      attribute :engine, Symbol, default: :erubis
+      attribute :template, String, default: :default_template
 
       def persisted?
         true

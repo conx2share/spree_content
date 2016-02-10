@@ -6,7 +6,7 @@ module Spree::Content
       include ActiveModel::Conversion
       extend ActiveModel::Naming
 
-      #attribute :id, BSON::ObjectId, default: Proc.new { BSON::ObjectId.new.to_s }
+      attribute :id, BSON::ObjectId, default: Proc.new { BSON::ObjectId.new.to_s }
       attribute :name, String
 
       attribute :elements, ElementSet
