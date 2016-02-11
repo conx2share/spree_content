@@ -11,7 +11,7 @@ module Spree::Content
             klass = klass.classify
             klass = 'Data' if klass == 'Datum'
 
-            "Spree::Content::Widget::#{klass}".constantize.new(obj)
+            "Spree::Content::Widget::#{klass}".constantize.new(widget)
           rescue Exception => e
             #byebug
             raise
@@ -19,7 +19,7 @@ module Spree::Content
           end
         else
           #byebug
-          raise ArgumentError, "Serialized Element must contain :type attribute: #{obj}"
+          raise ArgumentError, "Serialized Element must contain :type attribute: #{widget}"
         end
       end
     end
