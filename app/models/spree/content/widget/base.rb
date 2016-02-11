@@ -23,7 +23,11 @@ module Spree::Content
       end
 
       def self.descendants
-        ObjectSpace.each_object(Class).select { |klass| klass < self }
+        descendants = []
+        ObjectSpace.each_object(singleton_class) do |k|
+          descendants.unshift k unless k == self
+        end
+        descendants
       end
 
       validates_presence_of :id, :name

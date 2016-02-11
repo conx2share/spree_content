@@ -7,26 +7,41 @@ module Spree
 
       def edit
         @widget = Spree::Widget.find(params[:id])
+        @widget.value = @widget.instance.hashify.to_yaml
       end
 
       def new
         @widget = Spree::Widget.new
-        @widget.instance = Spree::Content::Widget::Slide.new
+        @widget_types = Spree::Content::Widget.descendants
       end
 
       def create
-        #TODO: VALIDATE
-        @widget = Spree::Widget.create widget_params
-        #TODO: handle my fail
-        redirect_to admin_widgets_path
+        @widget = Spree::Widget.new widget_params
+
+        if widget_params.has_key? :value
+          @widget.value = YAML.load(@widget.value)
+          if @widget.save
+            redirect_to admin_widgets_path
+          else
+            render :new
+          end
+        else
+          @widget.instance = Spree::Content::Widget::const_get(widget_params[:klass].classify).new
+          @widget.value = @widget.instance.hashify.to_yaml
+          render :new
+        end
       end
 
       def update
-        #TODO: VALIDATE
         @widget = Spree::Widget.find(params[:id])
-        @widget.update_attributes widget_params
-        #TODO: handle my fail
-        redirect_to admin_widgets_path
+        current_instance = @widget.instance.hashify
+        widget_params[:value] = YAML.load(widget_params[:value])
+        if @widget.update_attributes widget_params
+          redirect_to admin_widgets_path
+        else
+          @widget.value = current_instance.merge(@widget.value).to_yaml
+          render :edit
+        end
       end
 
 
