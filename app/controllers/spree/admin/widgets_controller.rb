@@ -12,7 +12,7 @@ module Spree
 
       def new
         @widget = Spree::Widget.new
-        @widget_types = Spree::Content::Widget.descendants
+        @widget_types = Spree::Content::Widget::Base.descendants
       end
 
       def create
