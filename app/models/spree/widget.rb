@@ -5,7 +5,7 @@ module Spree
     attr_writer :instance
 
     def instance
-      @instance ||= Spree::Content::Widget::const_get(value['type'].classify).new(value) if value.has_key? 'type'
+      @instance ||= Spree::Content::Widget::const_get(value[:type].classify).new(value) if value.has_key? :type
     end
   end
 end
