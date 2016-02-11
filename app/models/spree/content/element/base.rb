@@ -20,7 +20,7 @@ module Spree::Content
 
       def find(name)
         if self.name == name
-          return self
+          self
         elsif self.is_a? Element::Group
           self.elements.detect do |element|
             element.find(name)
@@ -29,7 +29,7 @@ module Spree::Content
       end
 
       def type
-        self.class.to_s.split('::').last.tableize.singularize
+        klass.tableize.singularize
       end
 
       def hashify
@@ -37,18 +37,21 @@ module Spree::Content
       end
 
       def render(renderer, context, options={})
-        options = options.dup
-        options[:template] ||= "widgets/#{self.class.to_s.split('::').last.downcase}"
-        renderer.render(context, options)
+        if template.present?
+          options = options.dup
+          options[:template] ||= template
+          renderer.render(context, options)
+        end
       end
 
       private
 
       def default_template
-        file = self.class.to_s.split('::').last.downcase
-        path = Pathname.new(Dir.pwd).join('templates/', "#{file}.html.erb")
+        "widgets/#{klass.downcase}"
+      end
 
-        path.exist? ? path.read : ''
+      def klass
+        @_klass ||= self.class.to_s.split('::').last
       end
     end
   end

@@ -13,12 +13,12 @@ module Spree::Content
 
             "Spree::Content::Widget::#{klass}".constantize.new(obj)
           rescue Exception => e
-            byebug
+            #byebug
             raise
             #raise ArgumentError, "Problem constantizing :type for: #{klass}"
           end
         else
-          byebug
+          #byebug
           raise ArgumentError, "Serialized Element must contain :type attribute: #{obj}"
         end
       end
