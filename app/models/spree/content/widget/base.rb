@@ -14,6 +14,11 @@ module Spree::Content
       @@definitions = []
       cattr_accessor :definitions
 
+      def self.inherited(klass)
+        super
+        klass.definitions = self.definitions.dup
+      end
+
       def elements
         if @elements.nil?
           @elements = self.class.definitions.map(&:dup)
