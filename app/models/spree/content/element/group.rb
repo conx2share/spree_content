@@ -7,8 +7,10 @@ module Spree::Content
       attribute :template, String, default: nil
 
       def hashify
-        byebug if elements.nil?
-        self.attributes.merge elements: elements.map(&:hashify), type: type
+        hash = self.attributes.dup
+        hash[:elements] = elements.map(&:hashify)
+        hash[:type] = type
+        hash
       end
 
       def render(renderer, context, options={})
