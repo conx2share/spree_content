@@ -11,8 +11,8 @@ module Spree::Content
 
       attribute :elements, ElementSet
 
-      @@definitions = []
-      cattr_accessor :definitions
+      class_attribute :definitions
+      self.definitions = []
 
       def self.inherited(klass)
         super
