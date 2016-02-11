@@ -7,32 +7,32 @@ module Spree::Content
     end
 
     def text(name, &block)
-      attributes[:elements] ||= {}
+      attributes[:elements] ||= []
       attributes[:elements] << ::Spree::Content::Element::Text.new(get_attrs(name, &block))
     end
 
     def image(name, &block)
-      attributes[:elements] ||= {}
+      attributes[:elements] ||= []
       attributes[:elements] << ::Spree::Content::Element::Image.new(get_attrs(name, &block))
     end
 
     def data(name, &block)
-      attributes[:elements] ||= {}
+      attributes[:elements] ||= []
       attributes[:elements] << ::Spree::Content::Element::Data.new(get_attrs(name, &block))
     end
 
     def image_group(name, &block)
-      attributes[:elements] ||= {}
+      attributes[:elements] ||= []
       attributes[:elements] << ::Spree::Content::Element::ImageGroup.new(get_attrs(name, &block))
     end
 
     def data_group(name, &block)
-      attributes[:elements] ||= {}
+      attributes[:elements] ||= []
       attributes[:elements] << ::Spree::Content::Element::DataGroup.new(get_attrs(name, &block))
     end
 
     def widget_group(name, &block)
-      attributes[:elements] ||= {}
+      attributes[:elements] ||= []
       attributes[:elements] << ::Spree::Content::Element::WidgetGroup.new(get_attrs(name, &block))
     end
 
