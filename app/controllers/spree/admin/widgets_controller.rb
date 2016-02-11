@@ -17,17 +17,11 @@ module Spree
 
       def create
         @widget = Spree::Widget.new widget_params
+        @widget.value = Spree::Content::Widget::const_get(widget_params[:klass].classify).new.hashify.to_yaml
 
-        if widget_params.has_key? :value
-          @widget.value = YAML.load(@widget.value)
-          if @widget.save
-            redirect_to admin_widgets_path
-          else
-            render :new
-          end
+        if @widget.save
+          redirect_to edit_admin_widget_path(@widget)
         else
-          @widget.instance = Spree::Content::Widget::const_get(widget_params[:klass].classify).new
-          @widget.value = @widget.instance.hashify.to_yaml
           render :new
         end
       end
