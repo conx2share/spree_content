@@ -17,7 +17,7 @@ module Spree
 
       def create
         @widget = Spree::Widget.new widget_params
-        @widget.value = Spree::Content::Widget::const_get(widget_params[:klass].classify).new.hashify.to_yaml
+        @widget.value = Spree::Content::Widget::const_get(widget_params[:klass].classify).new.hashify
 
         if @widget.save
           redirect_to edit_admin_widget_path(@widget)
