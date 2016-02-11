@@ -8,7 +8,8 @@ module Spree::Content
 
       def hashify
         hash = self.attributes.dup
-        hash[:elements] = elements.map(&:hashify)
+        hash[:elements] ||= []
+        hash[:elements] = hash[:elements].map(&:hashify)
         hash[:type] = type
         hash
       end
