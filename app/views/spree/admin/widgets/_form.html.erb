@@ -9,7 +9,7 @@
     <%= f.select :klass, options_for_select(@widget_types.map{ |type| [type.to_s, type.to_s.split('::').last.downcase] }) if defined?(@widget_types) %>
   </div>
 </div>
-<% if params.has_key? :widget || !defined?(@widget_types) %>
+<% if params.has_key?(:widget) || !defined?(@widget_types) %>
   <div class="row">
     <div class="col-md-12">
       <%= f.field_container :value, class: ['form-group'] do %>
