@@ -48,7 +48,7 @@ module Spree
       private
 
       def widget_params
-        params.require(:widget).permit(:name, :value, :klass)
+        @widget_params ||= params.require(:widget).permit(:name, :value, :klass)
       end
     end
   end
