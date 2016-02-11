@@ -6,8 +6,8 @@ module Spree::Content
 
     attr_reader :attributes
 
-    def method_missing(name, *args, &block)
-      attributes[name] = args[0]
+    def method_missing(name, *args)
+      attributes[name] = args.length == 1 ? args[0] : args
     end
   end
 end

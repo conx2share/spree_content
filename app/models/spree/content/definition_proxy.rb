@@ -16,6 +16,22 @@ module Spree::Content
       @klass.definitions << Spree::Content::Element::Image.new(get_attrs(name, &block))
     end
 
+    def data(name, &block)
+      @klass.definitions << Spree::Content::Element::Data.new(get_attrs(name, &block))
+    end
+
+    def image_group(name, &block)
+      @klass.definitions << Spree::Content::Element::ImageGroup.new(get_attrs(name, &block))
+    end
+
+    def data_group(name, &block)
+      @klass.definitions << Spree::Content::Element::DataGroup.new(get_attrs(name, &block))
+    end
+
+    def widget_group(name, &block)
+      @klass.definitions << Spree::Content::Element::WidgetGroup.new(get_attrs(name, &block))
+    end
+
     private
 
     def get_attrs(name, &block)
