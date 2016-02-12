@@ -14,6 +14,12 @@ module Spree::Content
           render_children renderer, context, options
         end
       end
+
+      def render_children(renderer, context, options={})
+        self.elements.inject([]) { |memo, widget| widget.elements.each { |element| memo << element }; memo }.map do |e|
+          e.render renderer, context, options
+        end.join("\n").html_safe
+      end
     end
   end
 end
