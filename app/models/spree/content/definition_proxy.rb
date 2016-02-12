@@ -5,7 +5,7 @@ module Spree::Content
       @klass_name = name.classify
 
       new_klass = Class.new(Spree::Content::Widget::Base)
-      @klass = Spree::Content::Widget.const_set(@klass_name, new_klass)
+      @klass = Spree::Content::Widget.const_set(@klass_name, new_klass) unless Spree::Content::Widget.const_defined?(@klass_name)
     end
 
     def text(name, &block)
