@@ -9,7 +9,7 @@ module Spree::Content
     end
 
     def name(name)
-      @klass.name = name
+      @klass.widget_name = name
     end
 
     def text(name, &block)
