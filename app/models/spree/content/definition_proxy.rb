@@ -4,8 +4,12 @@ module Spree::Content
     def initialize(name)
       @klass_name = name.classify
 
-      new_klass = Class.new(Spree::Content::Widget::Base)
-      @klass = Spree::Content::Widget.const_defined?(@klass_name) ? Spree::Content::Widget.const_get(@klass_name, new_klass) : Spree::Content::Widget.const_set(@klass_name, new_klass)
+      @klass = if Spree::Content::Widget.const_defined?(@klass_name)
+                 Spree::Content::Widget.const_get(@klass_name, new_klass)
+               else
+                 new_klass = Class.new(Spree::Content::Widget::Base)
+                 Spree::Content::Widget.const_set(@klass_name, new_klass)
+               end
     end
 
     def name(name)
