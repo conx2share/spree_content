@@ -11,12 +11,20 @@ module Spree::Content
 
       attribute :elements, ElementSet
 
+      class_attribute :widget_name
+
       class_attribute :definitions
       self.definitions = []
 
       def self.inherited(klass)
         super
         klass.definitions = self.definitions.dup
+        klass.widget_name = self.widget_name.dup
+      end
+
+      def initialize(*args, &block)
+        super
+        self.name = self.class.widget_name
       end
 
       def elements

@@ -8,6 +8,10 @@ module Spree::Content
       @klass = Spree::Content::Widget.const_defined?(@klass_name) ? Spree::Content::Widget.const_get(@klass_name, new_klass) : Spree::Content::Widget.const_set(@klass_name, new_klass)
     end
 
+    def name(name)
+      @klass.name = name
+    end
+
     def text(name, &block)
       @klass.definitions << Spree::Content::Element::Text.new(get_attrs(name, &block))
     end
