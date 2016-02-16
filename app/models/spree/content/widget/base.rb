@@ -18,8 +18,8 @@ module Spree::Content
 
       def self.inherited(klass)
         super
-        klass.definitions = self.definitions.dup
-        klass.widget_name = self.widget_name.dup unless self.widget_name.nil?
+        klass.definitions = []
+        klass.widget_name = nil
       end
 
       def initialize(*args, &block)
