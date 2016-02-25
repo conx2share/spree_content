@@ -41,12 +41,12 @@ module Spree::Content
         if template.present?
           options = options.dup
           options[:template] ||= template
-          old_element = context.instance_variable_get(:element) if context.instance_variable_defined?(:element)
-          context.assign({ element: self })
+          old_element = context.instance_variable_get(:current_element) if context.instance_variable_defined?(:current_element)
+          context.assign({ current_element: self })
           renderer.render(context, options)
         end
       ensure
-        context.assign({ element: old_element })
+        context.assign({ current_element: old_element })
       end
 
       private
